@@ -1,8 +1,8 @@
-// Custom Data Fetcher class for WordPress REST API
+// Custom JavaScript DataFetcher class for WordPress REST API
 // Author - visudo
-// You can use this class to dynamically generate WP page content from page templates
+// You can use this class to dynamically generate WP page content from page/post templates
 // This file is open-source and free to distribute, change, and use 
-// However I won't provide much help if you edit this file
+// What you can't do is use this file commericially without my permission
 
 export class DataFetcher {
 
@@ -14,12 +14,9 @@ export class DataFetcher {
 
   // grabs JSON data from hard-coded endpoints
   getJSONData() {
-
     var myjson = [];
-
     // add/remove api endpoints here
     var apis = [];
-
     this.type.forEach(function(element) {
       var thisfetch = contains(apis, element);
   		if (thisfetch != null) {
@@ -35,24 +32,18 @@ export class DataFetcher {
   			}
   		}
     })
-
     return myjson;
   }
 
   // Gets the page HTML from the elem.content.rendered field of the JSON
   generateHTMLtemplate(data) {
-
     var mydata = data;
     var ret = ``;
-
     if (mydata.length > 1) {
       mydata.forEach(function(element){
         element.forEach(function(elem){
-          if (elem.type == "page" || elem.type == "post" || elem.type == "shop_item") {
+          if (elem.type == "page" || elem.type == "post") {
             ret += `${elem.content.rendered}`;
-          }
-          else if (elem.type == "valve"){
-            ret += `${elem}`;
           }
         })
       })
@@ -60,7 +51,6 @@ export class DataFetcher {
     else {
       ret += `${mydata[0].content.rendered}`;
     }
-
     return ret;
   }
 
@@ -70,7 +60,6 @@ export class DataFetcher {
 	  load.remove();
 	  document.getElementById("app").innerHTML = html;
   }
-
 }
 
 //helper funciton

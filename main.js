@@ -19,18 +19,18 @@ export class DataFetcher {
     var apis = [];
     this.type.forEach(function(element) {
       var thisfetch = contains(apis, element);
-  		if (thisfetch != null) {
-  			try {
-  				const res = fetch(thisfetch)
-  				.then(res => res.json())
-  				.then(res => {
-  				  myjson.push(res);
-  				})
-  			}
-  			catch(error) {
-  				console.log(error);
-  			}
-  		}
+	if (thisfetch != null) {
+	  try {
+	    const res = fetch(thisfetch)
+	    .then(res => res.json())
+	    .then(res => {
+	      myjson.push(res);
+	    })
+	  }
+	  catch(error) {
+	    console.log(error);
+	  }
+	}
     })
     return myjson;
   }
@@ -56,9 +56,9 @@ export class DataFetcher {
 
   // removes loading div tag and brings content into view
   bringIntoView(html) {
-	  var load = document.getElementById("loading");
-	  load.remove();
-	  document.getElementById("app").innerHTML = html;
+    var load = document.getElementById("loading");
+    load.remove();
+    document.getElementById("app").innerHTML = html;
   }
 }
 
